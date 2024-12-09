@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Law-Talk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #E6E6FA;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .back-button {
+            margin-top: 1rem;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 0.6rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-button:hover {
+            background-color: #e4e4e4;
+        }
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+        }
+        .show-password {
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome Back !!! <br>Login to continue....</h1>
+    </header>
+
+    <div class="container">
+        <form method="POST">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+            <br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+            <input type="checkbox" id="show-password" class="show-password" onclick="togglePassword()"> Show Password<br><br>
+            <input type="submit" value="Login">
+        </form>
+    <center><a href="{{ url_for('home') }}" class="back-button">Back</a></center>
+    </div>
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var showPasswordCheckbox = document.getElementById("show-password");
+            if (showPasswordCheckbox.checked) {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url("home.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #444;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.container:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+header {
+    text-align: center;
+    padding: 1rem;
+    color: #ff6f61;
+    transition: color 0.3s ease-in-out;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px #ffe6e1;
+}
+
+header:hover {
+    color: #ff4d4d;
+}
+
+/* Form Inputs */
+input[type="text"], input[type="password"], input[type="submit"] {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 5px;
+    border: 1px solid #ff6f61;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #ff4d4d;
+    background-color: #ffe6e1;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 105, 97, 0.5);
+}
+
+/* Buttons */
+input[type="submit"], button {
+    background-color: #ff6f61;
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #ff4d4d;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+input[type="submit"]:active, button:active {
+    background-color: #e63e3e;
+    transform: translateY(0);
+}
+
+/* Back Button */
+.back-button {
+    display: inline-block;
+    padding: 0.8rem 1.2rem;
+    color: #ff6f61;
+    background-color: white;
+    border: 2px solid #ff6f61;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.back-button:hover {
+    color: white;
+    background-color: #ff6f61;
+    border-color: #ff4d4d;
+    transform: translateY(-2px);
+}
+
+.back-button:active {
+    background-color: #e63e3e;
+    transform: translateY(0);
+}
+
+/* Error Messages */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: white;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu ul li {
+    margin: 0.5rem 0;
+}
+
+.nav-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.nav-menu ul li a:hover {
+    color: #ff6f61;
+    transform: translateX(5px);
+}

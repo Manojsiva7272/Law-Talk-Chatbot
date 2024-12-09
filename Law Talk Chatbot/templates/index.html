@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law-Talk Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='home.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        header {
+            background-color: #004d99;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .dropbtn {
+            background-color: black;
+            color: white;
+            padding: 8px 16px;
+            font-size: 16px;
+            border: solid;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        form {
+            margin-bottom: 2rem;
+        }
+
+        label {
+            font-size: 1.2rem;
+            color: #004d99;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 2rem);
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+            border: 2px solid #004d99;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input[type="submit"] {
+            background-color: #004d99;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #003d80;
+        }
+
+        h2 {
+            color: #004d99;
+        }
+
+        p {
+            line-height: 1.6;
+            margin: 0.5rem 0;
+        }
+
+        .response {
+            padding: 1rem;
+            border: 1px solid #004d99;
+            border-radius: 4px;
+            background-color: #eaf2ff;
+        }
+
+        .highlight {
+            background-color: #cce5ff;
+            border: 1px solid #004d99;
+            border-radius: 4px;
+            padding: 0.5rem;
+            display: block;
+            margin: 0.5rem 0;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #004d99;
+            color: #fff;
+            padding: 2rem;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .sidebar.show {
+            display: block;
+        }
+
+        .sidebar h2 {
+            color: #fff;
+        }
+
+        .sidebar p {
+            color: #f4f4f9;
+            line-height: 1.5;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .sidebar a:hover {
+            color: #cce5ff;
+        }
+
+        .clear-history-btn {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .clear-history-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .download-buttons {
+            margin-top: 1rem;
+        }
+        .button-row {
+            display: flex;
+            justify-content: flex-end; /* Align buttons to the right */
+            gap: 10px;
+            background-color: black;
+            color: white;
+            padding: 8px 16px;
+            font-size: 16px;
+            border: solid;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        .header-btn {
+            background-color: #004d99;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .header-btn:hover {
+            background-color: #003d80;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #004d99;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .download-buttons button {
+            background-color: #004d99;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .download-buttons button:hover {
+            background-color: #003d80;
+        }
+
+        .history-item {
+            margin-bottom: 10px;
+        }
+
+        .history-separator {
+            border-top: 1px solid #ccc;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✨Law-Talk✨</h1>
+        <div class="button-row">
+            <a href="#" onclick="showSidebar('history')" class="header-btn">History</a>
+            <a href="#" onclick="showSidebar('helpline')" class="header-btn">Helpline</a>
+            <a href="#" onclick="showDownloadSection()" class="header-btn">Download Law-Book</a>
+            <a href="{{ url_for('logout') }}" class="header-btn">Logout</a>
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <h2 id="sidebar-title"></h2>
+        <a class="clear-history-btn" href="{{ url_for('clear_history') }}">Clear History</a>
+        <div id="sidebar-content"></div>
+    </div>
+
+
+    <div class="container">
+        <form method="POST" action="{{ url_for('index') }}">
+            <label for="query">Ask a legal question:</label>
+            <input type="text" id="query" name="query" placeholder="Enter your query..." required>
+            <input type="submit" value="Submit">
+        </form>
+
+        {% if response %}
+        <h2>Response:</h2>
+        <div class="response">
+            <p>{{ response }}</p>
+        </div>
+
+        <h2>Article Number:</h2>
+        <div class="highlight">{{ article_number }}</div>
+
+        <h2>Usage:</h2>
+        <div class="highlight">{{ usage }}</div>
+        {% endif %}
+        <div id="download-section" class="download-section" style="display: none;">
+            <select id="language-select">
+                <option value="" disabled selected>Select Language</option>
+                <option value="tamil">தமிழ்</option>
+                <option value="english">English</option>
+            </select>
+            <button onclick="downloadBook()">Download Law-Book</button>
+        </div>
+    </div>
+
+    <script>
+        function showSidebar(type) {
+            var sidebar = document.getElementById('sidebar');
+            var sidebarTitle = document.getElementById('sidebar-title');
+            var sidebarContent = document.getElementById('sidebar-content');
+
+            if (type === 'history') {
+                sidebarTitle.textContent = 'Chat History';
+                sidebarContent.innerHTML = '';  
+
+                var counter = 1;  
+                {% for item in history %}
+                sidebarContent.innerHTML += '<hr><div class="history-item">' + counter + '. {{ item }}</div>';
+                sidebarContent.innerHTML += '<div class="history-separator"></div>';
+                counter++;
+                {% endfor %}
+            } else if (type === 'helpline') {
+                sidebarTitle.textContent = 'Helpline Numbers';
+                sidebarContent.innerHTML = 
+            `
+                   <hr><strong> <p>Police: 100</p></strong><hr>
+                   <hr><strong> <p>Ambulance: 102</p></strong><hr>
+                   <hr><strong>  <p>Women Helpline: 1091</p></strong><hr>
+                    <hr><strong>  <p>Women Helpline for Domestic Abuse: 181</p></strong><hr>
+                  <hr><strong>  <p>Missing Child And Women: 1094</p></strong><hr>
+                                        <p>Children In Difficult Situation: 1098</p><hr>
+                    <p>Senior Citizen Helpline: 1291</p><hr>
+                    <p>Road Accident Emergency Service: 1073</p><hr>
+                    <p>Road Accident Emergency Service on National Highways: 1033</p><hr>
+                    <p>Railway Accident Emergency Service: 1072</p><hr>
+                    <p>Disaster Management: 1078</p><hr>
+                    <p>Relief Commissioner For Natural Calamities: 1070</p><hr>
+                    <p>Tourist Helpline: 1363</p><hr>
+                    <p>LPG Leak Helpline: 1906</p><hr>
+                    <p>AIDS Helpline: 1097</p><hr>
+                    <p>Anti-Poison Helpline: 1066</p><hr>
+                    <p>Blood Bank Information: 104</p><hr>
+                    <p>Tourist Helpline: 1363</p><hr>
+                    <p>Election Commission of India Helpline: 1950</p><hr>
+                    <p>Central Vigilance Commission: 1964</p><hr>
+                `;
+            }  sidebar.classList.toggle('show');
+        }
+             function showDownloadSection() {
+                var downloadSection = document.getElementById('download-section');
+                downloadSection.style.display = downloadSection.style.display === 'none' ? 'block' : 'none';
+            }
+    
+            function downloadBook() {
+                var select = document.getElementById('language-select');
+                var lang = select.value;
+    
+                if (lang) {
+                    window.location.href = `{{ url_for('download_book', lang='') }}${lang}`;
+                } else {
+                    alert('Please select a language.');
+                }
+            }
+
+           
+    </script>
+</body>
+</html>
